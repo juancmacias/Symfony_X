@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
 {{
     render(controller(
         'App\\Controller\\partes\\head::head_render',
@@ -19,13 +20,38 @@
 
 
 
-{{
-    render(controller(
-        'App\\Controller\\partes\\services::services_render',
-        { 'max': 3 }
-    ))
-}}
 
+        <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>1º Apellido</th>
+                <th>2º Apellido</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for alumno in alumnos %}
+            <tr>
+                <td>{{ alumno.id }}</td>
+                <td>{{ alumno.nombre }}</td>
+                <td>{{ alumno.primerApellido }}</td>
+                <td>{{ alumno.segundoApellido }}</td>
+                <td>
+                    <a href="{{ path('app_alumnos_show', {'id': alumno.id}) }}">show</a>
+                    <a href="{{ path('app_alumnos_edit', {'id': alumno.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_alumnos_new') }}">Create new</a> 
     <!-- About Section -->
     <section class="section" id="about">
         <div class="container">
@@ -58,50 +84,17 @@
     <!-- End OF About Section -->
 
 
-    <!-- Blog Section -->
-    <section class="section" id="blog">
-        <div class="container">
-            <h6 class="section-title mb-0 text-center">Latest Articles</h6>
-            <h6 class="section-subtitle mb-5 text-center">Architecto provident deserunt eveniet libero</h6>
-
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card border-0 mb-4">
-                        <img src="assets/imgs/blog-1.jpg" alt="" class="card-img-top w-100">
-                        <div class="card-body">                         
-                            <h6 class="card-title">Pariatur Omnis Harum quae sint.</h6>
-                            <p>Fuga quae ratione inventore Perferendis porro.</p>
-                            <a href="javascript:void(0)" class="small text-muted">Go To The Article</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card border-0 mb-4">
-                        <img src="assets/imgs/blog-2.jpg" alt="" class="card-img-top w-100">
-                        <div class="card-body">                         
-                            <h6 class="card-title"> Harum Quae Porro</h5>
-                            <p>Fuga quae ratione inventore Perferendis porro.</p>
-                            <a href="javascript:void(0)" class="small text-muted">Go To The Article</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card border-0 mb-4">
-                        <img src="assets/imgs/blog-3.jpg" alt="" class="card-img-top w-100">
-                        <div class="card-body">                         
-                            <h6 class="card-title">Qui optio neque alias</h6>
-                            <p>Fuga quae ratione inventore Perferendis porro.</p>
-                            <a href="javascript:void(0)" class="small text-muted">Go To The Article</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- End of Blog Section -->
 
 
 
+{{
+
+    render(controller(
+        'App\\Controller\\partes\\footer::footer_iniciar',
+        { 'max': 3 }
+    ))
+
+}}
 	
 {{
     render(controller(

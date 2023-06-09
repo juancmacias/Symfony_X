@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Relacion{% endblock %}
+
+{% block body %}
+    <h1>Create new Relacion</h1>
+
+    {{ include('relacion/_form.html.twig') }}
+
+    <a href="{{ path('app_relacion_index') }}">back to list</a>
+{% endblock %}
