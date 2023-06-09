@@ -35,7 +35,6 @@
     </header>
     <!-- End Of Page Header -->
 
-
 {{
     render(controller(
         'App\\Controller\\partes\\services::services_render',
@@ -74,14 +73,6 @@
     </section>
     <!-- End OF About Section -->
 
-{{
-
-    render(controller(
-        'App\\Controller\\partes\\porfolio::porfolio_iniciar',
-        { 'max': 3 }
-    ))
-
-}}
 
     <!-- Blog Section -->
     <section class="section" id="blog">
@@ -125,23 +116,8 @@
     </section>
     <!-- End of Blog Section -->
 
-{{
 
-    render(controller(
-        'App\\Controller\\partes\\testimonial::testimonial_iniciar',
-        { 'max': 3 }
-    ))
 
-}}
-
-{{
-
-    render(controller(
-        'App\\Controller\\partes\\footer::footer_iniciar',
-        { 'max': 3 }
-    ))
-
-}}
 	
 {{
     render(controller(
