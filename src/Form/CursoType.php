@@ -14,7 +14,6 @@ class CursoType extends AbstractType
         $builder
             ->add('titulo')
             ->add('descripcion')
-            ->add('relacions')
         ;
     }
 

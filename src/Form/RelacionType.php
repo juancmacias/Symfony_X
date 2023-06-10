@@ -12,8 +12,8 @@ class RelacionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('id_alumno')
-            ->add('id_curso')
+            ->add('fk_alumno')
+            ->add('fk_curso')
         ;
     }
 

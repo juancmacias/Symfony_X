@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\AlumnosRepository;
+use App\Repository\AlumnoRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: AlumnosRepository::class)]
-class Alumnos
+#[ORM\Entity(repositoryClass: AlumnoRepository::class)]
+class Alumno
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -19,12 +19,9 @@ class Alumnos
     private ?string $nombre = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $primer_apellido = null;
+    private ?string $apellido = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $segundo_apellido = null;
-
-    #[ORM\ManyToMany(targetEntity: Relacion::class, mappedBy: 'id_alumno')]
+    #[ORM\OneToMany(mappedBy: 'fk_alumno', targetEntity: Relacion::class)]
     private Collection $relacions;
 
     public function __construct()
@@ -49,26 +46,14 @@ class Alumnos
         return $this;
     }
 
-    public function getPrimerApellido(): ?string
+    public function getApellido(): ?string
     {
-        return $this->primer_apellido;
+        return $this->apellido;
     }
 
-    public function setPrimerApellido(string $primer_apellido): static
+    public function setApellido(string $apellido): static
     {
-        $this->primer_apellido = $primer_apellido;
-
-        return $this;
-    }
-
-    public function getSegundoApellido(): ?string
-    {
-        return $this->segundo_apellido;
-    }
-
-    public function setSegundoApellido(string $segundo_apellido): static
-    {
-        $this->segundo_apellido = $segundo_apellido;
+        $this->apellido = $apellido;
 
         return $this;
     }
@@ -85,7 +70,7 @@ class Alumnos
     {
         if (!$this->relacions->contains($relacion)) {
             $this->relacions->add($relacion);
-            $relacion->addIdAlumno($this);
+            $relacion->setFkAlumno($this);
         }
 
         return $this;
@@ -94,7 +79,10 @@ class Alumnos
     public function removeRelacion(Relacion $relacion): static
     {
         if ($this->relacions->removeElement($relacion)) {
-            $relacion->removeIdAlumno($this);
+            // set the owning side to null (unless already changed)
+            if ($relacion->getFkAlumno() === $this) {
+                $relacion->setFkAlumno(null);
+            }
         }
 
         return $this;

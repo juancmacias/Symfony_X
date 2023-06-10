@@ -21,7 +21,7 @@ class Curso
     #[ORM\Column(length: 255)]
     private ?string $descripcion = null;
 
-    #[ORM\ManyToMany(targetEntity: Relacion::class, mappedBy: 'id_curso')]
+    #[ORM\OneToMany(mappedBy: 'fk_curso', targetEntity: Relacion::class)]
     private Collection $relacions;
 
     public function __construct()
@@ -70,7 +70,7 @@ class Curso
     {
         if (!$this->relacions->contains($relacion)) {
             $this->relacions->add($relacion);
-            $relacion->addIdCurso($this);
+            $relacion->setFkCurso($this);
         }
 
         return $this;
@@ -79,7 +79,10 @@ class Curso
     public function removeRelacion(Relacion $relacion): static
     {
         if ($this->relacions->removeElement($relacion)) {
-            $relacion->removeIdCurso($this);
+            // set the owning side to null (unless already changed)
+            if ($relacion->getFkCurso() === $this) {
+                $relacion->setFkCurso(null);
+            }
         }
 
         return $this;

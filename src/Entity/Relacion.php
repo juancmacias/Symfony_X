@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\RelacionRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RelacionRepository::class)]
@@ -15,67 +13,37 @@ class Relacion
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToMany(targetEntity: alumnos::class, inversedBy: 'relacions')]
-    private Collection $id_alumno;
+    #[ORM\ManyToOne(inversedBy: 'relacions')]
+    private ?Alumno $fk_alumno = null;
 
-    #[ORM\ManyToMany(targetEntity: curso::class, inversedBy: 'relacions')]
-    private Collection $id_curso;
-
-    public function __construct()
-    {
-        $this->id_alumno = new ArrayCollection();
-        $this->id_curso = new ArrayCollection();
-    }
+    #[ORM\ManyToOne(inversedBy: 'relacions')]
+    private ?Curso $fk_curso = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return Collection<int, alumnos>
-     */
-    public function getIdAlumno(): Collection
+    public function getFkAlumno(): ?Alumno
     {
-        return $this->id_alumno;
+        return $this->fk_alumno;
     }
 
-    public function addIdAlumno(alumnos $idAlumno): static
+    public function setFkAlumno(?Alumno $fk_alumno): static
     {
-        if (!$this->id_alumno->contains($idAlumno)) {
-            $this->id_alumno->add($idAlumno);
-        }
+        $this->fk_alumno = $fk_alumno;
 
         return $this;
     }
 
-    public function removeIdAlumno(alumnos $idAlumno): static
+    public function getFkCurso(): ?Curso
     {
-        $this->id_alumno->removeElement($idAlumno);
-
-        return $this;
+        return $this->fk_curso;
     }
 
-    /**
-     * @return Collection<int, curso>
-     */
-    public function getIdCurso(): Collection
+    public function setFkCurso(?Curso $fk_curso): static
     {
-        return $this->id_curso;
-    }
-
-    public function addIdCurso(curso $idCurso): static
-    {
-        if (!$this->id_curso->contains($idCurso)) {
-            $this->id_curso->add($idCurso);
-        }
-
-        return $this;
-    }
-
-    public function removeIdCurso(curso $idCurso): static
-    {
-        $this->id_curso->removeElement($idCurso);
+        $this->fk_curso = $fk_curso;
 
         return $this;
     }

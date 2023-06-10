@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Alumnos;
+use App\Entity\Alumno;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Alumnos>
+ * @extends ServiceEntityRepository<Alumno>
  *
- * @method Alumnos|null find($id, $lockMode = null, $lockVersion = null)
- * @method Alumnos|null findOneBy(array $criteria, array $orderBy = null)
- * @method Alumnos[]    findAll()
- * @method Alumnos[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Alumno|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Alumno|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Alumno[]    findAll()
+ * @method Alumno[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class AlumnosRepository extends ServiceEntityRepository
+class AlumnoRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Alumnos::class);
+        parent::__construct($registry, Alumno::class);
     }
 
-    public function save(Alumnos $entity, bool $flush = false): void
+    public function save(Alumno $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class AlumnosRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Alumnos $entity, bool $flush = false): void
+    public function remove(Alumno $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class AlumnosRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Alumnos[] Returns an array of Alumnos objects
+//     * @return Alumno[] Returns an array of Alumno objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class AlumnosRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Alumnos
+//    public function findOneBySomeField($value): ?Alumno
 //    {
 //        return $this->createQueryBuilder('a')
 //            ->andWhere('a.exampleField = :val')

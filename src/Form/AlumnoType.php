@@ -2,27 +2,25 @@
 
 namespace App\Form;
 
-use App\Entity\Alumnos;
+use App\Entity\Alumno;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class AlumnosType extends AbstractType
+class AlumnoType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('nombre')
-            ->add('primer_apellido')
-            ->add('segundo_apellido')
-            ->add('relacions')
+            ->add('apellido')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Alumnos::class,
+            'data_class' => alumno::class,
         ]);
     }
 }
