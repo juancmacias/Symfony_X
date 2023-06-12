@@ -1,11 +1,53 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+{{
+    render(controller(
+        'App\\Controller\\partes\\head::head_render',
+        { 'max': 3 }
+    ))
+}}
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
 
-{% block title %}New Alumno{% endblock %}
+{{
+    render(controller(
+        'App\\Controller\\partes\\navbar::navbar_render',
+        { 'max': 3 }
+    ))
+}}
+
+<section class="section" id="about">
+        <div class="container">
+            <div class="col-md-6 pr-md-5 mb-4 mb-md-0">
+            
 
 {% block body %}
-    <h1>Create new Alumno</h1>
+    <h1>Nuevo alummo</h1>
 
     {{ include('alumno/_form.html.twig') }}
 
-    <a href="{{ path('app_alumno_index') }}">back to list</a>
+    
 {% endblock %}
+        </div> 
+    </div>
+</section>
+
+{{
+
+    render(controller(
+        'App\\Controller\\partes\\footer::footer_iniciar',
+        { 'max': 3 }
+    ))
+
+}}
+	
+{{
+    render(controller(
+        'App\\Controller\\partes\\script::script_iniciar',
+        { 'max': 3 }
+    ))
+}}
+
+</body>
+</html>
