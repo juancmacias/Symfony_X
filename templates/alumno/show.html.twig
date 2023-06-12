@@ -1,15 +1,33 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+{{
+    render(controller(
+        'App\\Controller\\partes\\head::head_render',
+        { 'max': 3 }
+    ))
+}}
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
 
-{% block title %}Alumno{% endblock %}
-
-{% block body %}
+{{
+    render(controller(
+        'App\\Controller\\partes\\navbar::navbar_render',
+        { 'max': 3 }
+    ))
+}}
+<section class="section" id="about">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-md-6 pr-md-5 mb-4 mb-md-0">
+            
     <h1>Alumno</h1>
 
     <table class="table">
         <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ alumno.id }}</td>
+                <td>{{ alumno.id }} </td>
             </tr>
             <tr>
                 <th>Nombre</th>
@@ -22,9 +40,60 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_alumno_index') }}">back to list</a>
-
-    <a href="{{ path('app_alumno_edit', {'id': alumno.id}) }}">edit</a>
+    <a class="btn btn-outline-primary w-lg" style="margin-bottom:10px" href="{{ path('app_alumno_index') }}">Volver a la lista</a>
+    <br>
+    <a class="btn btn-success w-lg" href="{{ path('app_alumno_edit', {'id': alumno.id}) }}">edit</a>
 
     {{ include('alumno/_delete_form.html.twig') }}
-{% endblock %}
+
+            </div>
+            <div class="col-md-6 pl-md-5">
+            <h2>Cursos a los que esta apuntado</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Titulo</th>
+                            <th>Apellido</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for curso in alumno.relacions %}
+                        <tr>
+                            <td>{{ curso.id }}</td>
+                            <td></td>
+                            <td></td>
+
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="4">No esta haciendo ningun curso</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{
+
+    render(controller(
+        'App\\Controller\\partes\\footer::footer_iniciar',
+        { 'max': 3 }
+    ))
+
+}}
+
+	
+{{
+    render(controller(
+        'App\\Controller\\partes\\script::script_iniciar',
+        { 'max': 3 }
+    ))
+}}
+
+</body>
+</html>

@@ -18,6 +18,7 @@ class AlumnoController extends AbstractController
     {
         return $this->render('alumno/index.html.twig', [
             'alumnos' => $alumnoRepository->findAll(),
+            'title' => 'Listado de alumnos',
         ]);
     }
 
@@ -37,6 +38,7 @@ class AlumnoController extends AbstractController
         return $this->renderForm('alumno/new.html.twig', [
             'alumno' => $alumno,
             'form' => $form,
+            'title' => 'Añadir y nuevo alumno a la lista',
         ]);
     }
 
@@ -45,6 +47,7 @@ class AlumnoController extends AbstractController
     {
         return $this->render('alumno/show.html.twig', [
             'alumno' => $alumno,
+            'title' => 'Detalle del alumno ',
         ]);
     }
 
@@ -63,6 +66,7 @@ class AlumnoController extends AbstractController
         return $this->renderForm('alumno/edit.html.twig', [
             'alumno' => $alumno,
             'form' => $form,
+            'title' => 'Editar alumno',
         ]);
     }
 
